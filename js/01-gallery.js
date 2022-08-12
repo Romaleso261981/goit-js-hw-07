@@ -1,4 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
+console.log(galleryItems);
 const refs = {
     galleryEl: document.querySelector(".gallery"),
   };
@@ -21,7 +22,7 @@ const refs = {
   refs.galleryEl.addEventListener("click", openModal);
 
   let instance;
-  
+
   function openModal(e) {
     e.preventDefault();
     if (e.target.tagName !== "IMG") return;
