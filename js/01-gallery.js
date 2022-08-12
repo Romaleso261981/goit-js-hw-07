@@ -1,5 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
-console.log(galleryItems);
+
 const refs = {
     galleryEl: document.querySelector(".gallery"),
   };
@@ -27,17 +27,15 @@ const refs = {
     e.preventDefault();
     if (e.target.tagName !== "IMG") return;
     const dataSource = e.target.dataset.source;
-  
+
     instance = basicLightbox.create(`
         <img src='${dataSource}'>
     `);
     instance.show();
   }
-  
+
   window.addEventListener("keydown", (e) => {
     if (e.code === "Escape") {
       instance.close();
     }
   });
-
-
