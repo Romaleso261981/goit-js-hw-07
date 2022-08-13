@@ -1,11 +1,11 @@
 import { galleryItems } from "./gallery-items.js";
 
 const refs = {
-    galleryEl: document.querySelector(".gallery"),
-  };
-  const markupHtml = galleryItems
-    .map(({ description, original, preview }) => {
-      return `<div class="gallery__item">
+  galleryEl: document.querySelector(".gallery"),
+};
+const markupHtml = galleryItems
+  .map(({ description, original, preview }) => {
+    return `<div class="gallery__item">
     <a class="gallery__link" href="large-image.jpg">
       <img
         class="gallery__image"
@@ -15,27 +15,31 @@ const refs = {
       />
     </a>
   </div>`;
-    })
-    .join("");
+  })
+  .join("");
 
-  refs.galleryEl.insertAdjacentHTML("afterbegin", markupHtml);
-  refs.galleryEl.addEventListener("click", openModal);
+refs.galleryEl.insertAdjacentHTML("afterbegin", markupHtml);
+refs.galleryEl.addEventListener("click", openModal);
 
-  let instance;
+let instance;
 
-  function openModal(e) {
-    e.preventDefault();
-    if (e.target.tagName !== "IMG") return;
-    const dataSource = e.target.dataset.source;
+function openModal(e) {
+  e.preventDefault();
+  if (e.target.tagName !== "IMG") return;
+  const dataSource = e.target.dataset.source;
 
-    instance = basicLightbox.create(`
+  instance = basicLightbox.create(`
         <img src='${dataSource}'>
     `);
-    instance.show();
-  }
+  instance.show();
+  window.addEventListener("keydown", addEventKay);
+}
 
-  window.addEventListener("keydown", (e) => {
-    if (e.code === "Escape") {
-      instance.close();
-    }
-  });
+
+function addEventKay(e) {
+  console.log(e.code);
+  if (e.code === "Escape") {
+    instance.close();
+    window.removeEventListener('keydown', addEventKay);
+  }
+}
